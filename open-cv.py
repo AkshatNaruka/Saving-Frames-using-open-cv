@@ -1,26 +1,28 @@
-# import the opencv library
+import numpy as np
 import cv2
-i=0
 
-# define a video capture object
-vid = cv2.VideoCapture(0)
-while(True):
-	
-	# Capture the video frame
-	# by frame
-	ret, frame = vid.read()
-	if cv2.waitKey(1) & 0xFF==ord('s'):
-		cv2.imwrite('frame'+str(i)+'.jpg', frame)
+cam = cv2.VideoCapture(0)
 
-	# Display the resulting frame
-	cv2.imshow('frame', frame)
-	# the 'q' button is set as the
-	# quitting button you may use any
-	# desired button of your choice
-	if cv2.waitKey(1) & 0xFF == ord('q'):
-		break
+while True:
+    ret,frame = cam.read()
 
-# After the loop release the cap object
-vid.release()
-# Destroy all the windows
+    cv2.imshow('frame',frame)
+
+    if cv2.waitKey(1) == ord('x'):
+        print("Exiting...")
+        break
+
+    elif cv2.waitKey(1) == ord('s'): 
+            cv2.imwrite(filename='test.jpg', img=frame)
+            cam.release()
+            img_new = cv2.imread('test.jpg')
+            img_new = cv2.imshow("Captured Image", img_new)
+            cv2.waitKey(1650)
+            cv2.destroyAllWindows()
+            print("Processing image...")
+
+        
+            break
+
+cam.release()
 cv2.destroyAllWindows()
